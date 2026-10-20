@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="ru" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ягуар — детская футбольная школа в Санкт-Петербурге</title>
+  <meta name="description" content="Детская футбольная школа «Ягуар»: дети 3–7 лет, группы до 10 человек, тренировки в тёплом манеже. Первое занятие бесплатно.">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@600;700;800;900&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:    { DEFAULT: '#091c22', 900: '#040f11', 800: '#07161b', 700: '#091c22', 600: '#0d2329' },
+            card:   { DEFAULT: '#10272d', line: '#1b363d' },
+            accent: { DEFAULT: '#4fc6dd', 600: '#3ab0c8', 300: '#8fdfee' },
+            gold:   { DEFAULT: '#e3ad5c', soft: '#f0c27b' },
+            muted:  '#8aa3a9',
+          },
+          fontFamily: {
+            display: ['Unbounded', 'system-ui', 'sans-serif'],
+            sans: ['Manrope', 'system-ui', 'sans-serif'],
+          },
+          maxWidth: { site: '1200px' },
+          boxShadow: { glow: '0 10px 40px -10px rgba(79,198,221,.55)' },
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer components {
+      .container-site { @apply mx-auto w-full max-w-site px-4 sm:px-6 lg:px-0; }
+      .eyebrow { @apply flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[.18em] text-accent; }
+      .eyebrow::before { content: ''; @apply block h-px w-7 bg-accent; }
+      .h2 { @apply font-display text-[30px] font-extrabold leading-[1.08] tracking-[-.01em] text-white sm:text-[40px] lg:text-[52px]; }
+      .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-semibold transition duration-200; }
+      .btn-primary { @apply btn bg-accent text-ink-900 shadow-glow hover:bg-accent-300; }
+      .btn-ghost { @apply btn border border-white/20 text-white hover:border-accent hover:text-accent; }
+      .card { @apply rounded-[22px] border border-card-line/70 bg-card; }
+      .field { @apply w-full rounded-xl border border-card-line bg-ink-900/70 px-4 py-3.5 text-sm text-white placeholder:text-muted/60 outline-none transition focus:border-accent; }
+      .chip { @apply rounded-full border border-white/15 px-4 py-2 text-xs font-semibold text-white/80 transition hover:border-accent hover:text-accent; }
+      .chip.is-active { @apply border-white bg-white text-ink-900; }
+    }
+    body { -webkit-font-smoothing: antialiased; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+    .faq-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .3s ease; }
+    .faq-item.is-open .faq-body { grid-template-rows: 1fr; }
+    .faq-item.is-open .faq-icon { background: #4fc6dd; color: #040f11; transform: rotate(45deg); }
+    .map-grid { background-image: linear-gradient(rgba(79,198,221,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(79,198,221,.08) 1px, transparent 1px); background-size: 48px 48px; }
+  </style>
+</head>
+<body class="bg-ink font-sans text-white">
+
+<!-- ============ HEADER ============ -->
+<header id="header" class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
+  <div class="container-site flex items-center justify-between gap-6 py-4">
+    <a href="#top" class="flex items-center gap-3" aria-label="Ягуар — на главную">
+      <img src="assets/img/logo.png" alt="" class="h-11 w-11 object-contain">
+      <span class="leading-none">
+        <span class="block font-display text-lg font-extrabold tracking-wide">ЯГУАР</span>
+        <span class="mt-1 block text-[9px] font-semibold uppercase tracking-[.2em] text-accent">футбольная школа</span>
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-7 text-[13px] font-medium text-white/85 lg:flex">
+      <a href="#about" class="transition hover:text-accent">О школе</a>
+      <a href="#branches" class="transition hover:text-accent">Филиалы</a>
+      <a href="#branches" class="transition hover:text-accent">Расписание</a>
+      <a href="#prices" class="transition hover:text-accent">Абонементы</a>
+      <a href="#faq" class="transition hover:text-accent">FAQ</a>
+      <a href="#contacts" class="transition hover:text-accent">Контакты</a>
+    </nav>
+
+    <div class="hidden items-center gap-6 lg:flex">
+      <a href="tel:+79097935877" class="text-[13px] font-semibold transition hover:text-accent">+7 (909) 793-58-77</a>
+      <a href="#signup" class="btn-primary !px-6 !py-3">Записаться</a>
+    </div>
+
+    <button id="burger" class="grid h-11 w-11 place-items-center rounded-full border border-white/20 lg:hidden" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu">
+      <svg class="icon-open h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="icon-close hidden h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-white/10 bg-ink-900/95 backdrop-blur lg:hidden">
+    <nav class="container-site flex flex-col py-4 text-base font-medium">
+      <a href="#about" class="border-b border-white/5 py-3">О школе</a>
+      <a href="#branches" class="border-b border-white/5 py-3">Филиалы и расписание</a>
+      <a href="#prices" class="border-b border-white/5 py-3">Абонементы</a>
+      <a href="#faq" class="border-b border-white/5 py-3">FAQ</a>
+      <a href="#contacts" class="border-b border-white/5 py-3">Контакты</a>
+      <a href="tel:+79097935877" class="py-3 text-accent">+7 (909) 793-58-77</a>
+      <a href="#signup" class="btn-primary mt-2">Записаться</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="relative isolate overflow-hidden bg-ink-800">
+  <img src="assets/img/hero-2x.jpg"
+       srcset="assets/img/hero-mobile.jpg 1078w, assets/img/hero-2x.jpg 2156w"
+       sizes="(min-width: 1024px) 68vw, 100vw"
+       width="2156" height="3836" fetchpriority="high" decoding="async"
+       alt="Малыши на тренировке с мячами" class="absolute inset-y-0 right-0 -z-20 h-full w-full object-cover object-[70%_40%] lg:w-[68%]">
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink-800 via-ink-800/90 to-ink-800/10 lg:via-ink-800/70"></div>
+  <div class="absolute inset-x-0 bottom-0 -z-10 h-48 bg-gradient-to-t from-ink-800 to-transparent"></div>
+
+  <div class="container-site pb-14 pt-32 lg:pb-16 lg:pt-40">
+    <div class="max-w-[560px]">
+      <span class="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-xs font-medium text-white/90">
+        <span class="h-2 w-2 animate-pulse rounded-full bg-accent"></span>
+        Открыт набор 2026/2027 · дети 3–7 лет
+      </span>
+      <h1 class="mt-8 font-display text-[72px] font-black leading-[.9] tracking-[-.02em] sm:text-[110px] lg:text-[150px]">ЯГУАР</h1>
+      <p class="mt-3 font-display text-xl font-bold uppercase tracking-[.08em] text-accent sm:text-3xl">Футбольная школа</p>
+      <p class="mt-7 max-w-[470px] text-base leading-relaxed text-white/85 sm:text-lg">
+        Первый мяч, подвижные игры и тренер, который видит каждого ребёнка. Небольшие группы и тренировки прямо у дома.
+      </p>
+      <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+        <a href="#signup" class="btn-primary">Записаться на бесплатное занятие</a>
+        <a href="#prices" class="btn-ghost">Смотреть абонементы</a>
+      </div>
+    </div>
+
+    <dl class="mt-16 grid grid-cols-2 gap-y-8 border-t border-white/10 pt-8 sm:grid-cols-4 lg:mt-20">
+      <div><dt class="font-display text-4xl font-extrabold lg:text-[44px]">3–7</dt><dd class="mt-2 text-xs text-white/70">лет — возраст игроков</dd></div>
+      <div><dt class="font-display text-4xl font-extrabold lg:text-[44px]">до 10</dt><dd class="mt-2 text-xs text-white/70">детей в группе</dd></div>
+      <div><dt class="font-display text-4xl font-extrabold lg:text-[44px]">1</dt><dd class="mt-2 text-xs text-white/70">филиал в городе</dd></div>
+      <div><dt class="font-display text-4xl font-extrabold lg:text-[44px]">0 ₽</dt><dd class="mt-2 text-xs text-white/70">первая тренировка</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="scroll-mt-20 bg-ink-800 py-20 lg:py-28">
+  <div class="container-site">
+    <div class="reveal grid gap-6 lg:grid-cols-[1.25fr_1fr] lg:items-end">
+      <div>
+        <p class="eyebrow">О школе</p>
+        <h2 class="h2 mt-5">Больше, чем футбол —<br class="hidden sm:block"> характер ягуара</h2>
+      </div>
+      <p class="max-w-[440px] text-[15px] leading-relaxed text-muted">«Ягуар» — детская футбольная школа, где первая тренировка превращается в любовь к футболу. Через игру развиваем координацию, скорость и уверенность в себе.</p>
+    </div>
+
+    <div class="mt-12 grid gap-5 lg:grid-cols-2">
+      <div class="reveal overflow-hidden rounded-[22px]">
+        <img src="assets/img/about.jpg" alt="Тренеры школы «Ягуар» с группой детей" class="h-full min-h-[300px] w-full object-cover transition duration-700 hover:scale-105" loading="lazy">
+      </div>
+      <div class="grid gap-5 sm:grid-cols-2">
+        <article class="card reveal p-6">
+          <span class="font-display text-sm font-bold text-accent">01</span>
+          <h3 class="mt-4 font-display text-lg font-bold leading-tight">Тренеры-<br>профессионалы</h3>
+          <p class="mt-4 text-sm leading-relaxed text-muted">Играли в ведущих академиях страны и за рубежом. Знают, как растят футболистов, и умеют работать с малышами.</p>
+        </article>
+        <article class="card reveal p-6">
+          <span class="font-display text-sm font-bold text-accent">02</span>
+          <h3 class="mt-4 font-display text-lg font-bold leading-tight">Каждый в центре внимания</h3>
+          <p class="mt-4 text-sm leading-relaxed text-muted">Работаем в небольших группах, чтобы никто не терялся и каждый шёл вперёд в своём темпе.</p>
+        </article>
+        <article class="card reveal p-6">
+          <span class="font-display text-sm font-bold text-accent">03</span>
+          <h3 class="mt-4 font-display text-lg font-bold leading-tight">Тренировки у дома</h3>
+          <p class="mt-4 text-sm leading-relaxed text-muted">Зимой занимаемся в тёплом манеже с мягким газоном, летом выходим на открытые поля и стадионы.</p>
+        </article>
+        <article class="card reveal p-6">
+          <span class="font-display text-sm font-bold text-accent">04</span>
+          <h3 class="mt-4 font-display text-lg font-bold leading-tight">Форма с фамилией</h3>
+          <p class="mt-4 text-sm leading-relaxed text-muted">Форма «Ягуара» с именной печатью. Один цвет, одна команда.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="mt-5 grid gap-5 sm:grid-cols-3">
+      <div class="reveal flex min-h-[220px] items-center rounded-[22px] bg-gradient-to-br from-accent-300 via-accent to-[#1f7f92] p-8 lg:min-h-[280px]">
+        <p class="font-display text-2xl font-extrabold leading-tight text-ink-900 lg:text-[32px]">Играй.<br>Развивайся.<br>Добивайся.</p>
+      </div>
+      <div class="reveal overflow-hidden rounded-[22px]"><img src="assets/img/gallery-1.jpg" alt="Разминка на открытой площадке" class="h-full min-h-[220px] w-full object-cover transition duration-700 hover:scale-105" loading="lazy"></div>
+      <div class="reveal overflow-hidden rounded-[22px]"><img src="assets/img/gallery-2.jpg" alt="Упражнения с мячом во дворе" class="h-full min-h-[220px] w-full object-cover transition duration-700 hover:scale-105" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMA ============ -->
+<section id="forma" class="scroll-mt-20 bg-ink-600 py-20 lg:py-28">
+  <div class="container-site">
+    <div class="reveal card grid overflow-hidden lg:grid-cols-[400px_1fr]">
+      <img src="assets/img/forma.jpg" alt="Фирменная форма «Ягуара»: футболка, шорты, гетры" class="h-full max-h-[560px] w-full object-cover" loading="lazy">
+      <div class="p-7 sm:p-10 lg:p-14 lg:pl-12">
+        <p class="eyebrow">Экипировка</p>
+        <h2 class="h2 mt-5 !text-[30px] sm:!text-[44px]">Фирменная<br>форма «Ягуара»</h2>
+        <p class="mt-6 max-w-[520px] text-[15px] leading-relaxed text-muted">Единая форма для всей группы. Ребёнок сразу понимает, что он часть команды, у которой есть свой цвет и свой характер.</p>
+        <ul class="mt-8 max-w-[580px] divide-y divide-white/10 border-y border-white/10">
+          <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-center sm:gap-0"><span class="flex w-40 items-center gap-3 font-display text-sm font-bold"><i class="h-2 w-2 rounded-full bg-accent"></i>Футболка</span><span class="text-sm text-muted">Дышащая ткань, фамилия и личный номер игрока</span></li>
+          <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-center sm:gap-0"><span class="flex w-40 items-center gap-3 font-display text-sm font-bold"><i class="h-2 w-2 rounded-full bg-accent"></i>Шорты</span><span class="text-sm text-muted">Чёрные с бирюзовыми лампасами</span></li>
+          <li class="flex flex-col gap-1 py-4 sm:flex-row sm:items-center sm:gap-0"><span class="flex w-40 items-center gap-3 font-display text-sm font-bold"><i class="h-2 w-2 rounded-full bg-accent"></i>Гетры</span><span class="text-sm text-muted">Бирюзовые, в цвет формы</span></li>
+        </ul>
+        <p class="mt-7 inline-flex items-center gap-2 rounded-xl border border-gold/30 bg-gold/10 px-4 py-3 text-xs font-medium text-gold-soft">
+          <span aria-hidden="true">★</span> Комплект формы в подарок при покупке абонемента на 3 месяца
+        </p>
+        <div class="mt-7"><a href="#signup" data-intent="Заказ формы" class="btn-primary">Заказать форму</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BRANCHES ============ -->
+<section id="branches" class="scroll-mt-20 bg-ink-800 py-20 lg:py-28">
+  <div class="container-site">
+    <div class="reveal grid gap-6 lg:grid-cols-[1.25fr_1fr] lg:items-end">
+      <div>
+        <p class="eyebrow">Филиалы и расписание</p>
+        <h2 class="h2 mt-5">Тренируемся<br>в теплом манеже</h2>
+      </div>
+      <p class="max-w-[440px] text-[15px] leading-relaxed text-muted">Выберите удобную площадку: в холодное время года тренируемся в тёплом манеже, летом переезжаем на открытые поля и стадионы.</p>
+    </div>
+
+    <div class="reveal mt-10 flex flex-wrap gap-2" role="tablist" aria-label="Тип площадки">
+      <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">Все филиалы</button>
+      <button class="chip" data-filter="outdoor" role="tab" aria-selected="false">Открытые площадки</button>
+      <button class="chip" data-filter="indoor" role="tab" aria-selected="false">Крытый манеж</button>
+    </div>
+
+    <div id="branch-list" class="mt-8 grid gap-5">
+      <article class="branch reveal card grid overflow-hidden lg:grid-cols-[560px_1fr]" data-type="indoor">
+        <img src="assets/img/manezh-obvodny.jpg" alt="Тренировка в манеже «Обводный»" class="h-[280px] w-full object-cover sm:h-[380px] lg:h-full lg:min-h-[600px]" loading="lazy">
+        <div class="flex flex-col p-6 sm:p-10">
+          <span class="w-fit rounded-full bg-gold/15 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gold">Крытый манеж</span>
+          <h3 class="mt-5 font-display text-2xl font-bold">Манеж «Обводный»</h3>
+          <p class="mt-2 flex items-center gap-1.5 text-sm text-muted">
+            <svg class="h-4 w-4 text-[#e5534b]" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a7 7 0 00-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+            Наб. Обводного канала, 74Ф
+          </p>
+          <div class="mt-7 overflow-hidden rounded-xl border border-white/5 bg-ink-900/60">
+            <div class="flex items-center justify-between border-b border-white/5 px-5 py-4 text-sm"><span class="w-24 font-semibold">3–5 лет</span><span class="flex-1 text-muted">Пн, Ср</span><span class="font-display font-bold text-accent">17:00</span></div>
+            <div class="flex items-center justify-between px-5 py-4 text-sm"><span class="w-24 font-semibold">5–7 лет</span><span class="flex-1 text-muted">Вт, Чт</span><span class="font-display font-bold text-accent">17:00</span></div>
+          </div>
+          <div class="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a href="#signup" data-branch="obvodny" class="btn-primary flex-1">Записаться</a>
+            <a href="https://yandex.ru/maps/?mode=routes&amp;rtext=~59.911485%2C30.329926&amp;rtt=auto" target="_blank" rel="noopener" class="btn-ghost">Маршрут</a>
+          </div>
+        </div>
+      </article>
+
+      <p id="branch-empty" class="card hidden p-8 text-center text-sm text-muted">
+        Открытые площадки появятся с началом летнего сезона. Сейчас все тренировки проходят в тёплом манеже.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICES ============ -->
+<section id="prices" class="scroll-mt-20 bg-ink-700 py-20 lg:py-28">
+  <div class="container-site">
+    <div class="reveal grid gap-6 lg:grid-cols-[1.25fr_1fr] lg:items-end">
+      <div>
+        <p class="eyebrow">Абонементы</p>
+        <h2 class="h2 mt-5">Тренируйся больше,<br>плати меньше</h2>
+      </div>
+      <p class="max-w-[440px] text-[15px] leading-relaxed text-muted">Первая тренировка бесплатно. Абонемент действует 30 дней, при пропусках занятия не сгорают (более подробная информация прописана в договоре).</p>
+    </div>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Trial -->
+      <article class="card reveal flex flex-col p-7">
+        <h3 class="font-display text-lg font-bold">Пробное</h3>
+        <p class="mt-2 border-b border-white/10 pb-5 text-xs text-muted">Знакомство со школой</p>
+        <p class="mt-6 font-display text-[40px] font-extrabold leading-none">0 ₽</p>
+        <p class="mt-2 text-xs font-medium text-accent">Бесплатно</p>
+        <ul class="mb-10 mt-7 space-y-3 text-[13px] text-white/85">
+          <li class="flex gap-2"><span class="text-accent">✓</span>1 тренировка 60 минут</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Знакомство с тренером</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Подбор группы по возрасту</li>
+        </ul>
+        <a href="#signup" data-plan="Пробное" class="btn-primary mt-auto !py-3.5">Записаться</a>
+      </article>
+      <!-- 4 -->
+      <article class="card reveal flex flex-col p-7">
+        <h3 class="font-display text-lg font-bold">4 занятия</h3>
+        <p class="mt-2 border-b border-white/10 pb-5 text-xs text-muted">1 раз в неделю</p>
+        <p class="mt-6 font-display text-[40px] font-extrabold leading-none">5000 ₽</p>
+        <p class="mt-2 text-xs font-medium text-accent">1 250 ₽ за занятие</p>
+        <ul class="mb-10 mt-7 space-y-3 text-[13px] text-white/85">
+          <li class="flex gap-2"><span class="text-accent">✓</span>4 тренировки в месяц</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Мини-игры и турниры</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Перенос по болезни</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Отчёт тренера о прогрессе</li>
+        </ul>
+        <a href="#signup" data-plan="4 занятия" class="btn-ghost mt-auto !py-3.5">Купить</a>
+      </article>
+      <!-- 8 popular -->
+      <article class="reveal relative flex flex-col rounded-[22px] bg-gradient-to-b from-accent-300 via-accent to-[#2a9bb2] p-7 text-ink-900 shadow-glow lg:-my-2 lg:py-9">
+        <div class="flex items-center justify-between gap-2">
+          <h3 class="font-display text-lg font-bold">8 занятий</h3>
+          <span class="rounded-full bg-ink-900 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-white">Популярный</span>
+        </div>
+        <p class="mt-2 border-b border-ink-900/15 pb-5 text-xs text-ink-900/70">2 раза в неделю</p>
+        <p class="mt-6 font-display text-[40px] font-extrabold leading-none">7500 ₽</p>
+        <p class="mt-2 text-xs font-semibold">937 ₽ за занятие</p>
+        <ul class="mb-10 mt-7 space-y-3 text-[13px] font-medium">
+          <li class="flex gap-2"><span>✓</span>8 тренировок в месяц</li>
+          <li class="flex gap-2"><span>✓</span>Мини-игры и турниры</li>
+          <li class="flex gap-2"><span>✓</span>Перенос и заморозка</li>
+          <li class="flex gap-2"><span>✓</span>Отчёт тренера о прогрессе</li>
+        </ul>
+        <a href="#signup" data-plan="8 занятий" class="btn mt-auto bg-ink-900 !py-3.5 text-white hover:bg-black">Купить</a>
+      </article>
+      <!-- 12 -->
+      <article class="card reveal flex flex-col p-7">
+        <div class="flex items-center justify-between gap-2">
+          <h3 class="font-display text-lg font-bold">12 занятий</h3>
+          <span class="rounded-full bg-gold/15 px-2.5 py-1 text-[9px] font-bold uppercase tracking-wider text-gold">Выгодно</span>
+        </div>
+        <p class="mt-2 border-b border-white/10 pb-5 text-xs text-muted">3 раза в неделю</p>
+        <p class="mt-6 font-display text-[40px] font-extrabold leading-none">10500 ₽</p>
+        <p class="mt-2 text-xs font-medium text-accent">875 ₽ за занятие</p>
+        <ul class="mb-10 mt-7 space-y-3 text-[13px] text-white/85">
+          <li class="flex gap-2"><span class="text-accent">✓</span>12 тренировок в месяц</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Мини-игры и турниры</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Перенос и заморозка</li>
+          <li class="flex gap-2"><span class="text-accent">✓</span>Отчёт тренера о прогрессе</li>
+        </ul>
+        <a href="#signup" data-plan="12 занятий" class="btn-ghost mt-auto !py-3.5">Купить</a>
+      </article>
+    </div>
+
+    <div class="reveal mt-8 flex flex-col gap-5 rounded-[22px] border border-gold/25 bg-gradient-to-r from-gold/15 via-gold/5 to-transparent p-6 sm:flex-row sm:items-center sm:justify-between sm:px-8">
+      <div class="flex items-start gap-4">
+        <span class="text-2xl" aria-hidden="true">🎁</span>
+        <div>
+          <p class="font-display text-base font-bold text-gold-soft sm:text-lg">Приведи друга — получи скидку 40% на абонемент</p>
+          <p class="mt-1 text-xs text-muted">Скидка начисляется разово на следующий абонемент за нового футболиста</p>
+        </div>
+      </div>
+      <a href="#faq" class="btn shrink-0 bg-gold !py-3 text-ink-900 hover:bg-gold-soft">Подробнее</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq" class="scroll-mt-20 bg-ink-800 py-20 lg:py-28">
+  <div class="container-site grid gap-10 lg:grid-cols-[400px_1fr] lg:gap-10">
+    <div class="reveal">
+      <p class="eyebrow">FAQ</p>
+      <h2 class="h2 mt-5">Частые<br>вопросы</h2>
+      <p class="mt-6 max-w-[320px] text-[15px] leading-relaxed text-muted">Собрали ответы на вопросы, которые родители задают чаще всего.</p>
+      <div class="card mt-8 max-w-[400px] p-6">
+        <p class="font-display text-base font-bold">Не нашли ответ?</p>
+        <p class="mt-2 text-xs text-muted">Напишите нам — ответим в течение 15 минут.</p>
+        <div class="mt-5 flex gap-2">
+          <a href="https://t.me/morflaysss" target="_blank" rel="noopener" class="btn-primary !px-5 !py-2.5 text-xs">Telegram</a>
+          <a href="https://vk.ru/jaguar.football" target="_blank" rel="noopener" class="btn-ghost !px-5 !py-2.5 text-xs">VK</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="faq-list" class="space-y-3">
+      <div class="faq-item reveal card is-open">
+        <button class="faq-btn flex w-full items-center justify-between gap-4 p-5 text-left sm:px-6" aria-expanded="true">
+          <span class="font-display text-[15px] font-bold">С какого возраста можно начать?</span>
+          <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/10 text-lg leading-none transition">+</span>
+        </button>
+        <div class="faq-body"><div class="overflow-hidden"><p class="px-5 pb-6 text-sm leading-relaxed text-muted sm:px-6">Принимаем детей от 3 лет. Группы формируются по возрасту: 3–5 лет и 5–7 лет — нагрузка и упражнения подобраны под каждый этап развития.</p></div></div>
+      </div>
+      <div class="faq-item reveal card">
+        <button class="faq-btn flex w-full items-center justify-between gap-4 p-5 text-left sm:px-6" aria-expanded="false">
+          <span class="font-display text-[15px] font-bold">Как проходит бесплатное пробное занятие?</span>
+          <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/10 text-lg leading-none transition">+</span>
+        </button>
+        <div class="faq-body"><div class="overflow-hidden"><p class="px-5 pb-6 text-sm leading-relaxed text-muted sm:px-6">Ребёнок занимается вместе с группой своего возраста 60 минут. Тренер знакомится с малышом, смотрит на его координацию и после занятия рассказывает родителям, какая группа подойдёт лучше всего.</p></div></div>
+      </div>
+      <div class="faq-item reveal card">
+        <button class="faq-btn flex w-full items-center justify-between gap-4 p-5 text-left sm:px-6" aria-expanded="false">
+          <span class="font-display text-[15px] font-bold">Что взять с собой на тренировку?</span>
+          <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/10 text-lg leading-none transition">+</span>
+        </button>
+        <div class="faq-body"><div class="overflow-hidden"><p class="px-5 pb-6 text-sm leading-relaxed text-muted sm:px-6">Удобную спортивную одежду, кроссовки или бутсы для искусственного газона, бутылочку воды и хорошее настроение. Мячи и инвентарь мы предоставляем.</p></div></div>
+      </div>
+      <div class="faq-item reveal card">
+        <button class="faq-btn flex w-full items-center justify-between gap-4 p-5 text-left sm:px-6" aria-expanded="false">
+          <span class="font-display text-[15px] font-bold">Сколько детей в группе?</span>
+          <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/10 text-lg leading-none transition">+</span>
+        </button>
+        <div class="faq-body"><div class="overflow-hidden"><p class="px-5 pb-6 text-sm leading-relaxed text-muted sm:px-6">Не больше 10 человек. Так тренер успевает уделить внимание каждому ребёнку.</p></div></div>
+      </div>
+      <div class="faq-item reveal card">
+        <button class="faq-btn flex w-full items-center justify-between gap-4 p-5 text-left sm:px-6" aria-expanded="false">
+          <span class="font-display text-[15px] font-bold">Можно ли перенести или заморозить абонемент?</span>
+          <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/10 text-lg leading-none transition">+</span>
+        </button>
+        <div class="faq-body"><div class="overflow-hidden"><p class="px-5 pb-6 text-sm leading-relaxed text-muted sm:px-6">Да. Пропуски по болезни переносятся на любом абонементе, а абонементы на 8 и 12 занятий можно ещё и заморозить. Подробные условия прописаны в договоре.</p></div></div>
+      </div>
+      <div class="faq-item reveal card">
+        <button class="faq-btn flex w-full items-center justify-between gap-4 p-5 text-left sm:px-6" aria-expanded="false">
+          <span class="font-display text-[15px] font-bold">Как оплатить абонемент?</span>
+          <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/10 text-lg leading-none transition">+</span>
+        </button>
+        <div class="faq-body"><div class="overflow-hidden"><p class="px-5 pb-6 text-sm leading-relaxed text-muted sm:px-6">Наличными или картой на месте, а также переводом — администратор пришлёт реквизиты после записи.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGNUP ============ -->
+<section id="signup" class="scroll-mt-20 bg-ink-600 py-20 lg:py-28">
+  <div class="container-site">
+    <div class="reveal card grid overflow-hidden lg:grid-cols-[480px_1fr]">
+      <img src="assets/img/signup.jpg" alt="Группа детей с тренерами в манеже" class="h-[300px] w-full object-cover sm:h-[420px] lg:h-full" loading="lazy">
+      <div class="p-6 sm:p-10 lg:p-14 lg:pl-12">
+        <p class="eyebrow">Записаться</p>
+        <h2 class="h2 mt-5 !text-[30px] sm:!text-[44px]">Первое занятие —<br>бесплатно</h2>
+        <p class="mt-5 max-w-[540px] text-[15px] leading-relaxed text-muted">Оставьте заявку — администратор перезвонит, подберёт группу по возрасту и удобный филиал.</p>
+
+        <form id="signup-form" class="mt-8 grid gap-4 sm:grid-cols-2" novalidate>
+          <input type="hidden" name="plan" id="plan-field">
+          <div style="position:absolute;left:-10000px" aria-hidden="true">
+            <label>Ваш сайт <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+          </div>
+          <label class="block">
+            <span class="mb-2 block text-xs text-muted">Имя родителя</span>
+            <input class="field" type="text" name="name" placeholder="Мария" autocomplete="name" required>
+          </label>
+          <label class="block">
+            <span class="mb-2 block text-xs text-muted">Телефон</span>
+            <input class="field" type="tel" name="phone" id="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" inputmode="tel" required>
+          </label>
+          <label class="block">
+            <span class="mb-2 block text-xs text-muted">Возраст ребёнка</span>
+            <select class="field appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 10 6%22><path fill=%22%234fc6dd%22 d=%22M0 0h10L5 6z%22/></svg>')] bg-[length:10px] bg-[right_1rem_center] bg-no-repeat" name="age" required>
+              <option value="" disabled selected>Выберите возраст</option>
+              <option>3 года</option><option>4 года</option><option>5 лет</option><option>6 лет</option><option>7 лет</option>
+            </select>
+          </label>
+          <label class="block">
+            <span class="mb-2 block text-xs text-muted">Филиал</span>
+            <select class="field appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 10 6%22><path fill=%22%234fc6dd%22 d=%22M0 0h10L5 6z%22/></svg>')] bg-[length:10px] bg-[right_1rem_center] bg-no-repeat" name="branch" id="branch-field" required>
+              <option value="" disabled selected>Выберите филиал</option>
+              <option value="obvodny">Манеж «Обводный»</option>
+            </select>
+          </label>
+          <button type="submit" class="btn-primary mt-2 sm:col-span-2">Записаться на бесплатное занятие</button>
+          <label class="flex items-start gap-3 text-xs text-muted sm:col-span-2">
+            <input type="checkbox" name="agree" checked required class="mt-0.5 h-4 w-4 shrink-0 accent-[#4fc6dd]">
+            <span>Согласен на обработку персональных данных</span>
+          </label>
+          <p id="form-error" class="hidden text-sm text-[#ff8a80] sm:col-span-2" role="alert"></p>
+        </form>
+
+        <div id="form-success" class="mt-8 hidden rounded-2xl border border-accent/30 bg-accent/10 p-6" role="status">
+          <p class="font-display text-lg font-bold text-accent">Заявка отправлена!</p>
+          <p class="mt-2 text-sm text-white/80">Спасибо! Администратор перезвонит вам в ближайшее время, чтобы подобрать группу и время.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTS ============ -->
+<section id="contacts" class="scroll-mt-20 bg-ink-800 py-20 lg:py-28">
+  <div class="container-site grid gap-5 lg:grid-cols-[400px_1fr]">
+    <div class="reveal rounded-[22px] border border-card-line/70 bg-card p-7 sm:p-10">
+      <p class="eyebrow">Контакты</p>
+      <h2 class="mt-5 font-display text-[30px] font-extrabold leading-tight">Свяжитесь<br>с нами</h2>
+      <div class="mt-7 border-t border-white/10 pt-6">
+        <p class="text-[10px] font-semibold uppercase tracking-[.15em] text-muted">Телефон</p>
+        <a href="tel:+79097935877" class="mt-2 block font-display text-xl font-bold transition hover:text-accent">+7 (909) 793-58-77</a>
+        <p class="mt-1 text-xs text-muted">Тренер Евгений</p>
+        <a href="tel:+79958315307" class="mt-4 block font-display text-xl font-bold transition hover:text-accent">+7 (995) 831-53-07</a>
+        <p class="mt-1 text-xs text-muted">Тренер Максим</p>
+      </div>
+      <div class="mt-6 border-t border-white/10 pt-6">
+        <p class="text-[10px] font-semibold uppercase tracking-[.15em] text-muted">Часы работы</p>
+        <p class="mt-2 font-display text-lg font-bold">Ежедневно, 9:00–22:00</p>
+      </div>
+      <div class="mt-8 flex flex-wrap gap-2">
+        <a href="https://t.me/morflaysss" target="_blank" rel="noopener" class="rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-xs font-semibold text-accent transition hover:bg-accent hover:text-ink-900">Telegram</a>
+        <a href="https://vk.ru/jaguar.football" target="_blank" rel="noopener" class="rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-xs font-semibold text-accent transition hover:bg-accent hover:text-ink-900">VK</a>
+      </div>
+    </div>
+
+    <div class="reveal map-grid relative min-h-[380px] overflow-hidden rounded-[22px] border border-card-line/70 bg-card">
+      <iframe
+        title="Карта: Манеж «Обводный»"
+        src="https://yandex.ru/map-widget/v1/org/futbolnaya_shkola_yaguar/46253848686/?ll=30.329926%2C59.911485&amp;z=16"
+        class="absolute inset-0 h-full w-full border-0"
+        loading="lazy" allowfullscreen></iframe>
+      <a href="https://yandex.ru/maps/org/futbolnaya_shkola_yaguar/46253848686/" target="_blank" rel="noopener" class="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-ink-900/90 px-4 py-2 text-xs font-medium transition hover:border-accent hover:text-accent">
+        <i class="h-2.5 w-2.5 rounded-full bg-accent"></i>Открыть в Яндекс Картах
+      </a>
+        </a>
+        <p class="mt-4 text-sm text-muted">Играй. Развивайся. Добивайся.</p>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-[.15em] text-accent">Школа</p>
+        <ul class="mt-4 space-y-3 text-sm text-muted">
+          <li><a href="#about" class="hover:text-white">О школе</a></li>
+          <li><a href="#forma" class="hover:text-white">Форма</a></li>
+          <li><a href="#prices" class="hover:text-white">Абонементы</a></li>
+          <li><a href="#faq" class="hover:text-white">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-[.15em] text-accent">Филиалы</p>
+        <ul class="mt-4 space-y-3 text-sm text-muted">
+          <li><a href="#branches" class="hover:text-white">Манеж «Обводный»</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-[.15em] text-accent">Связь</p>
+        <ul class="mt-4 space-y-3 text-sm text-muted">
+          <li><a href="tel:+79097935877" class="hover:text-white">+7 (909) 793-58-77</a></li>
+          <li><a href="tel:+79958315307" class="hover:text-white">+7 (995) 831-53-07</a></li>
+          <li><a href="https://t.me/morflaysss" target="_blank" rel="noopener" class="hover:text-white">Telegram</a></li>
+          <li><a href="https://vk.ru/jaguar.football" target="_blank" rel="noopener" class="hover:text-white">VK</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="flex flex-col gap-3 border-t border-white/10 py-6 text-xs text-muted sm:flex-row sm:justify-between">
+      <p>© <span id="year">2026</span> Футбольная школа «Ягуар»</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-white">Политика конфиденциальности</a>
+        <a href="#" class="hover:text-white">Договор оферты</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
