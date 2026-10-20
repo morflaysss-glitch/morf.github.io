@@ -62,3 +62,9 @@ details p{margin:10px 0 0}
 figure.cover figcaption{padding:10px 16px;font-size:13px;color:var(--muted);background:var(--card)}
 .sources ol{padding-left:22px}
 .sources li{font-size:15px}
+.author img{width:96px;height:96px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--accent)}
+.table-wrap{overflow-x:auto;margin:24px 0;border:1px solid var(--line);border-radius:18px}
+table{width:100%;border-collapse:collapse;font-size:15px;min-width:520px}
+caption{text-align:left;padding:14px 16px;font-weight:700;background:var(--card)}
+th,td{padding:12px 16px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+th{color:var(--accent);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
