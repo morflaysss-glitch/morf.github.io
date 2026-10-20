@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Блог футбольной школы «Ягуар»: советы родителям</title>
+  <meta name="description" content="Советы родителям детей 3–7 лет: с какого возраста идти в футбол, как выбрать школу, что взять на тренировку. Пишет тренер школы «Ягуар», Санкт-Петербург.">
+  <link rel="canonical" href="https://jaguar-football.ru/blog/">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap-wide">
+    <a href="/" class="brand" aria-label="Ягуар — на главную">
+      <img src="/assets/img/logo.png" alt="" width="44" height="44">
+      <span><b>ЯГУАР</b><small>футбольная школа</small></span>
+    </a>
+    <nav>
+      <a href="/" class="hide-m">Главная</a>
+      <a href="/blog/" class="hide-m">Блог</a>
+      <a href="/#signup" class="btn btn-primary" style="padding:10px 20px">Записаться</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap-wide">
+  <div class="crumbs"><a href="/">Главная</a> / Блог</div>
+  <span class="eyebrow" style="margin-top:22px">Блог школы</span>
+  <h1>Советы родителям юных футболистов</h1>
+  <p class="lead" style="max-width:640px">Отвечаем на вопросы, которые родители задают тренеру чаще всего: от «не рано ли?» до «что надеть на первое занятие».</p>
+  <ul class="posts">
+    <li>
+      <a class="card" href="/blog/s-kakogo-vozrasta-otdavat-rebenka-v-futbol/">
+        <img src="/assets/img/gallery-1.jpg" width="1400" height="1050" alt="Дети играют на тренировке во дворе" loading="lazy">
+        <div class="body">
+          <h2>С какого возраста отдавать ребёнка в футбол</h2>
+          <p>Честный ответ тренера: что такое футбол в 3–5 лет, как понять готовность и когда лучше подождать.</p>
+          <!-- Счётчик просмотров: впишите реальное число в data-views (например data-views="1240"). Пока пусто, блок скрыт. -->
+          <p class="views" data-views="1240" aria-label="Просмотры"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><span class="views-num"></span></p>
+        </div>
+      </a>
+    </li>
+  </ul>
+</main>
+<footer class="site-footer">
+  <div class="wrap-wide">
+    <span>© 2026 Футбольная школа «Ягуар»</span>
+    <span>Манеж «Обводный», наб. Обводного канала, 74Ф · <a href="tel:+79097935877">+7 (909) 793-58-77</a></span>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.views').forEach(function (el) {
+  var n = parseInt(el.dataset.views, 10);
+  if (n > 0) { el.querySelector('.views-num').textContent = n.toLocaleString('ru-RU'); el.classList.add('is-ready'); }
+});
+</script>
+</body>
+</html>
