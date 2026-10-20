@@ -179,6 +179,7 @@
     var done = function () {
       form.classList.add('hidden');
       success.classList.remove('hidden');
+      if (typeof window.ym === 'function') window.ym(113703140, 'reachGoal', 'zayavka');
     };
 
     // POST через iframe: не требует CORS и не передаёт телефон в URL.
