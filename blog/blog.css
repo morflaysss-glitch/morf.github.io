@@ -70,3 +70,7 @@ th,td{padding:12px 16px;text-align:left;vertical-align:top;border-top:1px solid 
 th{color:var(--accent);font-size:13px;text-transform:uppercase;letter-spacing:.06em}
 .posts .views{display:none;align-items:center;gap:6px;margin-top:12px;font-size:13px;color:var(--muted)}
 .posts .views.is-ready{display:flex}
+/* Обложки целиком, без обрезки: фото по центру, по краям размытая копия */
+.cover.fit .frame{position:relative;overflow:hidden;background:var(--card);display:flex;justify-content:center}
+.cover.fit .frame .bg{position:absolute;inset:-30px;width:calc(100% + 60px);height:calc(100% + 60px);max-width:none;aspect-ratio:auto;object-fit:cover;filter:blur(28px) brightness(.5);transform:scale(1.05)}
+.cover.fit .frame .main{position:relative;width:auto;height:auto;max-width:100%;max-height:min(78vh,680px);aspect-ratio:auto;object-fit:contain}
