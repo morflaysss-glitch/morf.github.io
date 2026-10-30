@@ -94,5 +94,5 @@ th{color:var(--accent);font-size:13px;text-transform:uppercase;letter-spacing:.0
 @media (min-width:1024px){.site-header nav.m-menu{display:none}}
 
 /* Курсор-мяч */
-html,body,*{cursor:url(/assets/img/cursor-ball.svg) 16 16,url(/assets/img/cursor-ball.png) 16 16,auto!important}
+html,body,*{cursor:url(/assets/img/cursor-ball.svg?v=2) 16 16,url(/assets/img/cursor-ball.png?v=2) 16 16,auto!important}
 input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]),textarea{cursor:text!important}
