@@ -92,3 +92,7 @@ th{color:var(--accent);font-size:13px;text-transform:uppercase;letter-spacing:.0
 .site-header .m-menu .wrap-wide{align-items:stretch}
 .site-header nav.m-menu[hidden]{display:none}
 @media (min-width:1024px){.site-header nav.m-menu{display:none}}
+
+/* Курсор-мяч */
+html,body,*{cursor:url(/assets/img/cursor-ball.svg) 16 16,url(/assets/img/cursor-ball.png) 16 16,auto!important}
+input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=button]),textarea{cursor:text!important}
