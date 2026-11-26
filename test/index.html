@@ -42,6 +42,19 @@ ul.facts{padding-left:18px;margin:0 0 18px}ul.facts li{margin-bottom:6px}
 .hide{display:none}
 @media(prefers-reduced-motion:reduce){.ball{transition:none}}
 </style>
+  <!-- Yandex.Metrika counter -->
+  <script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113703140', 'ym');
+
+    ym(113703140, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+  </script>
+  <noscript><div><img src="https://mc.yandex.ru/watch/113703140" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+  <!-- /Yandex.Metrika counter -->
 </head>
 <body>
 <div class="wrap">
@@ -117,11 +130,12 @@ function finish(){
  $("rl").innerHTML=r.l.map(t=>`<li>${t}</li>`).join("");
  const msg=`Здравствуйте! Прошли тест «Готов ли ребёнок к футболу». Результат: ${r.t}, возраст: ${age}. Хотим записаться на бесплатное пробное занятие в «Ягуар».`;
  $("tg").href="https://t.me/morflaysss?text="+encodeURIComponent(msg);
- setBall(5);show("res");window.scrollTo(0,0);
+ setBall(5);show("res");window.ym&&ym(113703140,'reachGoal','test_finish');window.scrollTo(0,0);
 }
-$("go").onclick=()=>{i=0;ans=[];show("quiz");render()};
+$("go").onclick=()=>{window.ym&&ym(113703140,'reachGoal','test_start');i=0;ans=[];show("quiz");render()};
 $("opts").onclick=e=>{const b=e.target.closest(".opt");if(!b)return;ans[i]=+b.dataset.k;b.classList.add("pick");setTimeout(()=>{if(++i<Q.length)render();else finish()},220)};
 $("back").onclick=()=>{if(i>0){i--;render()}};
+$("tg").onclick=()=>{window.ym&&ym(113703140,'reachGoal','test_signup');};
 $("again").onclick=()=>{setBall(0);show("start")};
 }
 </script>
